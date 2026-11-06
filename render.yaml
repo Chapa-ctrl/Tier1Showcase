@@ -1,0 +1,31 @@
+# Render Blueprint: in Render, New -> Blueprint, pick this repo, and Render
+# creates the web service from this file. It asks you for every value marked
+# "sync: false". See "Deploy to Render" in README.md.
+services:
+  - type: web
+    name: showcase-site        # rename per client, e.g. tidepool-site
+    runtime: node
+    plan: starter              # the free plan blocks email (SMTP)
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: FORM_SECRET
+        generateValue: true    # Render makes a random one
+      - key: SMTP_HOST
+        sync: false
+      - key: SMTP_PORT
+        value: "587"
+      - key: SMTP_USER
+        sync: false
+      - key: SMTP_PASS
+        sync: false
+      - key: MAIL_FROM
+        sync: false
+      - key: CONTACT_TO
+        sync: false
+      - key: SITE_NAME
+        sync: false
+      - key: CANONICAL_HOST
+        sync: false
